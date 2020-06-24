@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reactjs iniciante</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script>
+      const sobrenoneContext = React.createContext("sobrenone");
+
+      function MyComponent1() {
+        return React.createElement(
+          sobrenoneContext.Provider,
+          { value: "Nascimento" },
+          React.createElement(
+            "div",
+            { className: "component" },
+            React.createElement(MyComponent2)
+          )
+        );
+      }
+      function MyComponent2() {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement(MyComponent3)
+        );
+      }
+      function MyComponent3() {
+        const name = "Fabio";
+        return React.createElement(
+          "div",
+          null,
+          React.createElement(MyComponent4, { name: name })
+        );
+      }
+      function MyComponent4(props) {
+        return React.createElement(sobrenoneContext.Consumer, null, (sobreN) =>
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "p",
+              null,
+              `componente 4 ${props.name} ${sobreN}`
+            )
+          )
+        );
+      }
+      function MyComponent() {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement(MyComponent1)
+        );
+      }
+      ReactDOM.render(
+        React.createElement(MyComponent),
+        document.querySelector("#app")
+      );
+    </script>
+  </body>
+</html>
